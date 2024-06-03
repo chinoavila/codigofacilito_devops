@@ -23,14 +23,14 @@ for DIR in $(find "$(pwd)" -type d); do
       cd $DIR
       case "$1" in
         start)
-          docker-compose up -d
+          sudo docker compose up -d
           ;;
         down)
-          docker-compose down
+          sudo docker compose down
           ;;
         restart)
-          docker-compose down
-          docker-compose up -d
+          sudo docker compose down
+          sudo docker compose up -d
           ;;
         *)
           echo "Acción inválida: $1"

@@ -8,12 +8,14 @@ services:
       context: .
       dockerfile: Dockerfile.api
     image: avatares-backend-api
+    networks: 
+    - avatares-network
     ports:
-      - "5000:5000"
+      - "${FLASK_PORT}:${FLASK_PORT}"
     environment:
       - FLASK_APP=${FLASK_APP}
       - FLASK_ENV=${FLASK_ENV}
-    command: flask run --host=0.0.0.0 --port=5000
+    command: flask run --host=0.0.0.0 --port=${FLASK_PORT}
 
   frontend-web:
     container_name: avatares_frontend
@@ -21,9 +23,14 @@ services:
       context: .
       dockerfile: Dockerfile.web
     image: avatares-frontend-web
+    networks: 
+    - avatares-network
     ports:
-      - "5173:5173"
+      - "${VITE_PORT}:${VITE_PORT}"
     environment:
       - VITE_HOST=${VITE_HOST}
       - VITE_PORT=${VITE_PORT}
     command: npm run dev
+
+networks:
+  avatares-network:
