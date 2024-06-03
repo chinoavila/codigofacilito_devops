@@ -1,6 +1,6 @@
 ### Trabajo Final de BootCamp DevOps de CódigoFacilito
----
 ##### Estudiante: Alejandro Javier Ávila
+---
 ##### Stack utilizado
 - Docker
 - Terraform & AWS
@@ -10,6 +10,20 @@
 
 ##### Aplicaciones del proyecto:
 
-- Avatars App
-- To-Do List
+Avatares App
+: url avatares
+
+To-Do List
+: url todolist
 ---
+
+#### Desplegar localmente:
+
+Linux:
+```
+./deploy.sh <start | down | restart>
+```
+Windows:
+```
+.\deploy.ps1 <start | down | restart>
+```
