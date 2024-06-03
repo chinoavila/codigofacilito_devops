@@ -22,7 +22,7 @@ services:
     container_name: todolist_nodejs_expressjs
     build:
       context: .
-      dockerfile: Dockerfile.web
+      dockerfile: Dockerfile
     image: todolist-nodejs-expressjs
     networks: 
     - todolist-network
