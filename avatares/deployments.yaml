@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: backend-api
-        image: <tu-nombre-de-repositorio-de-ecr>/avatares-backend-api:latest
+        image: 033445731182.dkr.ecr.us-east-1.amazonaws.com/avatares-backend-api:latest
         ports:
         - containerPort: 5000
         env:
@@ -24,7 +24,7 @@ spec:
           value: "development"
         command: ["flask", "run", "--host=0.0.0.0", "--port=5000"]
       - name: frontend-web
-        image: <tu-nombre-de-repositorio-de-ecr>/avatares-frontend-web:latest
+        image: 033445731182.dkr.ecr.us-east-1.amazonaws.com/avatares-frontend-web:latest
         ports:
         - containerPort: 5173
         env:

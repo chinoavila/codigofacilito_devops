@@ -6,15 +6,11 @@
 - Kubernetes
 - Terraform & AWS
 - GitHub Actions
-- Prometheus & Grafana
 
 ##### Aplicaciones del proyecto:
 
-Avatares App
-: url avatares
-
-To-Do List
-: url todolist
+- Avatares App
+- To-Do List
 ---
 
 #### Desplegar localmente:
