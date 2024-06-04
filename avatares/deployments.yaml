@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: avatares
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: avatares
+  template:
+    metadata:
+      labels:
+        app: avatares
+    spec:
+      containers:
+      - name: backend-api
+        image: 033445731182.dkr.ecr.us-east-1.amazonaws.com/avatares-backend-api:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: FLASK_APP
+          value: "app.py"
+        - name: FLASK_ENV
+          value: "development"
+        command: ["flask", "run", "--host=0.0.0.0", "--port=5000"]
+      - name: frontend-web
+        image: 033445731182.dkr.ecr.us-east-1.amazonaws.com/avatares-frontend-web:latest
+        ports:
+        - containerPort: 5173
+        env:
+        - name: VITE_HOST
+          value: "0.0.0.0"
+        - name: VITE_PORT
+          value: "5173"
+        command: ["npm", "run", "dev"]

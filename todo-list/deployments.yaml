@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todolist
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todolist
+  template:
+    metadata:
+      labels:
+        app: todolist
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:8.0
+        env:
+        - name: MYSQL_DATABASE
+          value: "todolist"
+        - name: MYSQL_ROOT_PASSWORD
+          value: "password"
+        ports:
+        - containerPort: 3306
+        readinessProbe:
+          exec:
+            command: ["mysqladmin", "-p$${MYSQL_ROOT_PASSWORD}", "ping", "-h", "localhost"]
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 10
+      - name: nodejs-expressjs
+        image: <tu-nombre-de-repositorio-de-ecr>/todolist-nodejs-expressjs:latest
+        ports:
+        - containerPort: 3000
+        command: ["npm", "run", "dev"]

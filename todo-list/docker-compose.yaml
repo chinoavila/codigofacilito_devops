@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: todolist_mysql
+    environment:
+      MYSQL_DATABASE: '${MYSQL_DATABASE}'
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+    networks: 
+    - todolist-network
+    ports:
+    - "${MYSQL_PORT}:${MYSQL_PORT}"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "-p${MYSQL_ROOT_PASSWORD}", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
+
+  nodejs-expressjs:
+    container_name: todolist_nodejs_expressjs
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: todolist-nodejs-expressjs
+    networks: 
+    - todolist-network
+    ports:
+      - "${NODE_PORT}:${NODE_PORT}"
+    command: npm run dev
+
+networks:
+  todolist-network:

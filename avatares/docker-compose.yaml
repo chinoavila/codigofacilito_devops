@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+
+  backend-api:
+    container_name: avatares_backend
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    image: avatares-backend-api
+    networks: 
+    - avatares-network
+    ports:
+      - "${FLASK_PORT}:${FLASK_PORT}"
+    environment:
+      - FLASK_APP=${FLASK_APP}
+      - FLASK_ENV=${FLASK_ENV}
+    command: flask run --host=0.0.0.0 --port=${FLASK_PORT}
+
+  frontend-web:
+    container_name: avatares_frontend
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    image: avatares-frontend-web
+    networks: 
+    - avatares-network
+    ports:
+      - "${VITE_PORT}:${VITE_PORT}"
+    environment:
+      - VITE_HOST=${VITE_HOST}
+      - VITE_PORT=${VITE_PORT}
+    command: npm run dev
+
+networks:
+  avatares-network:
