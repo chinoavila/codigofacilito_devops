@@ -3,8 +3,8 @@
 ---
 ##### Stack utilizado
 - Docker
-- Terraform & AWS
 - Kubernetes
+- Terraform & AWS
 - GitHub Actions
 - Prometheus & Grafana
 
